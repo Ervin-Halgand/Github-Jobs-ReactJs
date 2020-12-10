@@ -20,9 +20,6 @@ function SearchBox() {
         <div className="flex ml-auto bg-gray-100 rounded-xl p-2 absolute -bottom-8 items-center sm:static">
             <SearchInput addClass="sm:w-24 lg:w-40 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faSearch} placeHolder="Title" />
             <SearchInput addClass="sm:w-24 lg:w-40 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faMapMarkerAlt} placeHolder="Location" />
-            {<div className="sm:hidden">
-                {filterHandler(filter)}
-            </div>}
             <div className="sm:flex items-center ml-2 m:p-2 hidden">
                 <label className="inline-flex items-center md:mr-6 ">
                     <input className="h-5 w-5" type="checkbox"></input>
@@ -32,6 +29,9 @@ function SearchBox() {
                     <Button text="Search" />
                 </div>
             </div>
+            {<div className="sm:hidden">
+                {filterHandler(filter)}
+            </div>}
             <div className="sm:hidden">
                 <button className="ml-1" onClick={() => { setOpenFilter(!openFilter) }}>
                     <FontAwesomeIcon icon={faFilter} />
