@@ -1,11 +1,46 @@
 import React from 'react';
-import Card from '../Card/Card'
+import { ApiResult } from '../../API/Api';
+import CardLoader from '../skeletonLoader/Card/CardLoader'
+import Card from '../Card/Card';
 
-function LandingPage() {
+interface LandingPageProps {
+    jobs: ApiResult[],
+    loadMore: Function,
+    initialLoading: Boolean,
+    loading: Boolean,
+    noMoreItems: Boolean,
+    page: number,
+    error: any,
+    handleErrorReload: Function
+}
+
+const LandingPage = ({handleErrorReload, error, jobs, loadMore, initialLoading, loading, noMoreItems, page }: LandingPageProps) => {
+    var loaderComponents = [];
+    for (var i = 0; i < 16; i++) {
+        loaderComponents.push(<CardLoader key={i} />);
+    }
+    if (error)
+    return <div className="grid place-items-center mt-24 sm:mt-12 text-4xl text-gray-600">
+    <button disabled={loading === true} onClick={() => handleErrorReload()} className="bg-indigo-500 p-3 mb-4 self-center focus:outline-none hover:bg-indigo-700 rounded-xl text-white transition-colors duration-300 ">Reload</button></div>
+    if (initialLoading)
+        return (
+            <div className="flex flex-col min-h-screen" style={{ backgroundColor: "#fcf7f2" }}>
+                <section className="px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 gap-y-10 my-20 sm:my-8">
+                    {loaderComponents}
+                </section>
+                {!noMoreItems && <button disabled={loading === true} onClick={() => loadMore(page + 1)} className="bg-indigo-500 p-3 mb-4 w-36 self-center focus:outline-none hover:bg-indigo-700 rounded-xl text-white transition-colors duration-300 "> {loading ? "Loading..." : "Load more"}</button>}
+            </div>
+        )
+    if (jobs.length < 1)
+        return <div className="grid place-items-center mt-24 sm:mt-12 text-4xl text-gray-600"> <div>No results</div></div>
     return (
-        <div className="px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 gap-y-10 mt-20 sm:mt-8">
-            <Card location="Zuiderslag 2, 3833 BP, Leusden" url="https://jobs.github.com/positions/37ef38d2-7705-4432-b67f-f4860094d699" title="Frontend Developer Frontend Developer Frontend Developer" type="Full Time" created_at={new Date('Wed Dec 09 05:18:35 UTC 2020')} company="Cactus Communications" company_logo="https://img.huffingtonpost.com/asset/5ce57b4c210000b90ed0e864.png?cache=LVoNCtl&ops=1200_630" />
-            <Card location="Zuiderslag 2, 3833 BP, Leusden" url="https://jobs.github.com/positions/37ef38d2-7705-4432-b67f-f4860094d699" title="Frontend Developer Frontend Developer Frontend Developer" type="Full Time" created_at={new Date('Thu Dec 10 15:45:08 UTC 2020')} company="Cactus Communications" company_logo="https://img.huffingtonpost.com/asset/5ce57b4c210000b90ed0e864.png?cache=LVoNCtl&ops=1200_630" />
+        <div className="flex flex-col min-h-screen" style={{ backgroundColor: "#fcf7f2" }}>
+            <section className="px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 gap-y-10 my-20 sm:my-8">
+                {jobs.map(({ id, location, title, created_at, company, company_logo, type }, i) =>
+                    <Card key={id} location={location} title={title} type={type} created_at={new Date(created_at)} company={company} company_logo={company_logo} />
+                )}
+            </section>
+            {!noMoreItems && <button disabled={loading === true} onClick={() => loadMore(page + 1)} className="bg-indigo-500 p-3 mb-4 w-36 self-center focus:outline-none hover:bg-indigo-700 rounded-xl text-white transition-colors duration-300 "> {loading ? "Loading..." : "Load more"}</button>}
         </div>
     );
 }

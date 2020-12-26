@@ -1,14 +1,14 @@
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 import React from 'react';
-import TimeAgo from 'javascript-time-ago'
-
-import en from 'javascript-time-ago/locale/en'
+import NoLogo from '../../assets/no-logo.png';
+import './style.css'
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo();
 
 interface card {
     type: string,
-    url: string,
     created_at: Date | number,
     company: string,
     location: string
@@ -18,9 +18,9 @@ interface card {
 
 function Card({ title, type, created_at, company, company_logo, location }: card) {
     return (
-        <div className="w-full relative bg-gray-100 rounded-lg h-48">
-            <div className="absolute -top-5 left-4 -translate-x-0 rounded-md overflow-hidden h-12 w-12 border-black border-3">
-                <img className="object-cover w-full h-full" src={company_logo} alt={`logo-${company}`} />
+        <div className="w-full bg-gray-200 relative rounded-lg h-48 cursor-pointer shadow-sm card">
+            <div className="bg-white absolute -top-5 left-4 rounded-md overflow-hidden h-12 w-12 img-container">
+                <img className="object-contain w-full h-full" src={company_logo ? company_logo : NoLogo} alt={`logo-${company}`} />
             </div>
             <div className="p-3">
                 <div className="mt-5 flex items-center">
@@ -28,7 +28,7 @@ function Card({ title, type, created_at, company, company_logo, location }: card
                     <div className="rounded-full h-2 w-2 bg-gray-300 ml-2" />
                     <div className="ml-2 text-gray-600">{type}</div>
                 </div>
-                <strong className="inline-block my-1 text-lg">{title}</strong>
+                <strong className="inline-block my-1 text-md">{title}</strong>
                 <div className="text-gray-600">{company}</div>
                 <div className="absolute bottom-2 text-indigo-600">{location.split(',').length > 1 ? `${location.split(',')[0]},Location...` : location}</div>
             </div>

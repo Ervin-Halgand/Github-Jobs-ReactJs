@@ -1,4 +1,7 @@
-interface ApiResult {
+import axios, { AxiosInstance } from 'axios'
+
+export interface ApiResult {
+    id: number,
     type: string,
     url: string,
     created_at: string,
@@ -8,7 +11,33 @@ interface ApiResult {
     title: string
     description: string
     how_to_apply: string
-    company_logo: string
+    company_logo: string,
 }
 
-export default ApiResult;
+export default class GithubJobsApi {
+    private _axiosGithub: AxiosInstance;
+    private _urlLocal: string = "" //"https://cors-anywhere.herokuapp.com/";
+    readonly requestMaxItemsLength : Number = 50;
+
+
+    constructor() {
+        this._axiosGithub = axios.create({
+            baseURL: `${this._urlLocal}https://jobs.github.com/`,
+            timeout: 10000,
+        });
+    }
+
+    getArgumentsJobs(title: String, location: String, type: Boolean, page: Number): Promise<ApiResult[]> {
+        let urlArguments = '';
+        if (title.length)
+            urlArguments += `description=${title}`;
+        if (type)
+            urlArguments += `&full_time=${type}`;
+        if (location.length)
+            urlArguments += `&location=${location.replaceAll(' ', '+')}`;
+        return this._axiosGithub.get(`positions.json?${urlArguments}&page=${page}`)
+            .then(res => {
+                return res.data;
+            }).catch(error => { throw error });
+    }
+}
