@@ -8,16 +8,17 @@ interface InputProps {
     addClass?: string,
     addClassIcon?: string,
     inputValue: string,
-    handleChange: Function
+    handleChange: Function,
+    Search: Function
 }
 
-function SearchInput({ placeHolder, icon, addClass, addClassIcon, handleChange, inputValue }: InputProps) {
+function SearchInput({ placeHolder, icon, addClass, addClassIcon, handleChange, inputValue, Search }: InputProps) {
     return (
         <div className={`flex items-center focus-within:text-blue-600 transition duration-300 ease-in-out ml-2 ${addClass} overflow-hidden`}>
             <div className={addClassIcon}>
                 <FontAwesomeIcon icon={icon} />
             </div>
-            <input onChange={(e) => handleChange(e.target.value)} type="text" name="name" placeholder={placeHolder} value={inputValue} className="w-full text-black focus:outline-none pl-2 bg-transparent placeholder-black"></input>
+            <input onChange={(e) => handleChange(e.target.value)} onKeyDown={(e) => (e.key === 'Enter') && Search()} type="text" name="name" placeholder={placeHolder} value={inputValue} className="w-full text-black focus:outline-none pl-2 bg-transparent placeholder-black"></input>
         </div>
     );
 }

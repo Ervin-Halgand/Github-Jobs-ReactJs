@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import GithubJobsApi from './API/Api';
 import Header from './Components/Header/Header'
-import LandingPage from './Components/LandingPage/LandingPage'
+import LandingPage from './View/LandingPage'
+import JobsInformation from './View/JobsInformation'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 const App = () => {
 
@@ -59,8 +65,18 @@ const App = () => {
 
   return (
     <>
-      <Header titleValue={filterTitle} locationValue={filterLocation} SearchActionhandler={SearchAction} titleHandler={setFilterTitle} locationHandler={setFilterLocation} typeHandler={setFilterType} />
-      <LandingPage handleErrorReload={SearchAction} error={error} jobs={jobs} loadMore={setPage} page={page} initialLoading={initialLoading} loading={loading} noMoreItems={lenght} />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Header titleValue={filterTitle} locationValue={filterLocation} SearchActionhandler={SearchAction} titleHandler={setFilterTitle} locationHandler={setFilterLocation} typeHandler={setFilterType} />
+            <LandingPage handleErrorReload={SearchAction} error={error} jobs={jobs} loadMore={setPage} page={page} initialLoading={initialLoading} loading={loading} noMoreItems={lenght} />
+          </Route>
+          <Route exact path="/jobs/:id">
+            <Header titleValue={filterTitle} locationValue={filterLocation} SearchActionhandler={SearchAction} titleHandler={setFilterTitle} locationHandler={setFilterLocation} typeHandler={setFilterType} />
+            <JobsInformation apiGithub={githubAPI} />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }

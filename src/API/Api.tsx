@@ -17,7 +17,7 @@ export interface ApiResult {
 export default class GithubJobsApi {
     private _axiosGithub: AxiosInstance;
     private _urlLocal: string = "" //"https://cors-anywhere.herokuapp.com/";
-    readonly requestMaxItemsLength : Number = 50;
+    readonly requestMaxItemsLength: Number = 50;
 
 
     constructor() {
@@ -36,6 +36,12 @@ export default class GithubJobsApi {
         if (location.length)
             urlArguments += `&location=${location.replaceAll(' ', '+')}`;
         return this._axiosGithub.get(`positions.json?${urlArguments}&page=${page}`)
+            .then(res => {
+                return res.data;
+            }).catch(error => { throw error });
+    }
+    getSingleJob(id: string): Promise<ApiResult> {
+        return this._axiosGithub.get(`positions/${id}.json`)
             .then(res => {
                 return res.data;
             }).catch(error => { throw error });

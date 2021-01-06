@@ -22,13 +22,13 @@ const SearchBox = ({ titleHandler, locationHandler, typeHandler, SearchActionhan
     let [filter, setfilter] = useState<filterType>(filterType.title);
 
     const filterHandler = (filter: filterType) =>
-        filter === filterType.title ? <SearchInput inputValue={titleValue} handleChange={titleHandler} addClass="w-40" addClassIcon="hidden" icon={faSearch} placeHolder="Filter by title..." /> :
-            <SearchInput inputValue={locationValue} handleChange={locationHandler} addClass="w-40" addClassIcon="hidden" icon={faMapMarkerAlt} placeHolder="Filter by location..." />
+        filter === filterType.title ? <SearchInput Search={SearchActionhandler} inputValue={titleValue} handleChange={titleHandler} addClass="w-40" addClassIcon="hidden" icon={faSearch} placeHolder="Filter by title..." /> :
+            <SearchInput Search={SearchActionhandler} inputValue={locationValue} handleChange={locationHandler} addClass="w-40" addClassIcon="hidden" icon={faMapMarkerAlt} placeHolder="Filter by location..." />
 
     return (
         <div className="flex ml-auto bg-gray-100 rounded-xl p-2 absolute -bottom-8 items-center sm:static">
-            <SearchInput inputValue={titleValue} handleChange={titleHandler} addClass="sm:w-24 lg:w-52 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faSearch} placeHolder="Title, description..." />
-            <SearchInput inputValue={locationValue} handleChange={locationHandler} addClass="sm:w-24 lg:w-44 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faMapMarkerAlt} placeHolder="Location..." />
+            <SearchInput Search={SearchActionhandler} inputValue={titleValue} handleChange={titleHandler} addClass="sm:w-24 lg:w-52 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faSearch} placeHolder="Title, description..." />
+            <SearchInput Search={SearchActionhandler} inputValue={locationValue} handleChange={locationHandler} addClass="sm:w-24 lg:w-44 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faMapMarkerAlt} placeHolder="Location..." />
             <div className="sm:flex items-center ml-2 m:p-2 hidden">
                 <label className="inline-flex items-center md:mr-6 ">
                     <input onChange={(e) => { console.log(e); typeHandler(e.target.checked) }} className="h-5 w-5" type="checkbox"></input>
