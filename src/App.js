@@ -52,6 +52,7 @@ const App = () => {
     }
     setReset(true);
   }
+  // eslint-disable-next-line
   useEffect(async () => {
     if (reset === true) {
       await fetchData(setInitialLoading, true);
@@ -61,6 +62,7 @@ const App = () => {
     await fetchData(setLoading, false);
     if (initialLoading)
       setInitialLoading(false);
+      // eslint-disable-next-line
   }, [page])
 
   return (
