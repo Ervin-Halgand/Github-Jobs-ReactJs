@@ -13,16 +13,12 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
 
     useEffect(() => {
         apiGithub.getSingleJob(id).then(job => {
-            console.log(job);
             let test = job.description.split('>');
             test.forEach((parsedHtmlElement, index) => {
-                if (parsedHtmlElement.indexOf(':') > -1 && parsedHtmlElement.length < 30) {
+                if (parsedHtmlElement.indexOf(':') > -1 && parsedHtmlElement.length < 30)
                     test[index - 1] += " class='font-bold my-4' style='color: #4E93A2; text-transform: upperCase;'";
-                }
-                if (parsedHtmlElement.substring(1, 4) === '<ul' && index >= 2) {
+                if (parsedHtmlElement.substring(1, 4) === '<ul' && index >= 2)
                     test[index - 2] += " class='font-bold my-4' style='color: #4E93A2; text-transform: upperCase;'"
-                    console.log(test[index - 2])
-                }
 
             })
             job.description = test.join('>').toString();
@@ -32,7 +28,7 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
             window.location.assign('/');
         }).finally(() => setIsLoading(false))
 
-    }, []);
+    }, [id, apiGithub]);
     if (isLoading)
         return (
             <section className="m-1 mt-14 p-4 rounded-xl bg-gray-200 sm:m-8 sm:mt-3">

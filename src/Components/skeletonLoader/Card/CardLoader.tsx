@@ -1,4 +1,5 @@
 import './style.css'
+import '../../Card/style.css'
 
 import React from 'react';
 
@@ -6,7 +7,7 @@ const CardLoader = () => {
     return (
         <div className="cardLoader h-48 bg-gray-200">
             <div className="w-full rounded-lg h-48 relative">
-                <div className="absolute -top-5 left-4 h-12 w-12">
+                <div className="absolute -top-5 left-4 h-12 w-12 img-container">
                     <div className="w-full h-full loading relative"></div>
                 </div>
                 <div className="p-3">

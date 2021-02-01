@@ -16,7 +16,7 @@ export interface ApiResult {
 
 export default class GithubJobsApi {
     private _axiosGithub: AxiosInstance;
-    private _urlLocal: string = "" //"https://cors-anywhere.herokuapp.com/";
+    private _urlLocal: string = "https://cors-anywhere.herokuapp.com/";
     readonly requestMaxItemsLength: Number = 50;
 
 

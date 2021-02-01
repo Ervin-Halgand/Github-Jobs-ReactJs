@@ -19,8 +19,9 @@ const LandingPage = ({handleErrorReload, error, jobs, loadMore, initialLoading, 
         loaderComponents.push(<CardLoader key={i} />);
     }
     if (error)
-    return <div className="grid place-items-center mt-24 sm:mt-12 text-4xl text-gray-600">
-    <button disabled={loading === true} onClick={() => handleErrorReload()} className="bg-indigo-500 p-3 mb-4 self-center focus:outline-none hover:bg-indigo-700 rounded-xl text-white transition-colors duration-300 ">Reload</button></div>
+    return <div className="flex flex-col items-center justify-start pt-20 sm:pt-9 text-gray-600 min-h-screen" style={{ backgroundColor: "#fcf7f2" }}>
+        <h2 className="mb-7 text-xl">An Error occured please reload</h2>
+    <button disabled={loading === true} onClick={() => handleErrorReload()} className="bg-red-500 p-3 px-14 mb-4 focus:outline-none hover:bg-red-700 rounded-xl text-white transition-colors duration-300">Reload</button></div>
     if (initialLoading)
         return (
             <div className="flex flex-col min-h-screen" style={{ backgroundColor: "#fcf7f2" }}>
@@ -31,7 +32,7 @@ const LandingPage = ({handleErrorReload, error, jobs, loadMore, initialLoading, 
             </div>
         )
     if (jobs.length < 1)
-        return <div className="grid place-items-center mt-24 sm:mt-12 text-4xl text-gray-600"> <div>No results</div></div>
+        return <div className="flex justify-center pt-24 sm:pt-12 text-4xl text-gray-600 min-h-screen" style={{ backgroundColor: "#fcf7f2" }}> <div>No results</div></div>
     return (
         <div className="flex flex-col min-h-screen" style={{ backgroundColor: "#fcf7f2" }}>
             <section className="px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 gap-y-10 my-20 sm:my-8">

@@ -31,7 +31,7 @@ const SearchBox = ({ titleHandler, locationHandler, typeHandler, SearchActionhan
             <SearchInput Search={SearchActionhandler} inputValue={locationValue} handleChange={locationHandler} addClass="sm:w-24 lg:w-44 hidden sm:flex sm:border-r-2 placeholder-opacity-75" icon={faMapMarkerAlt} placeHolder="Location..." />
             <div className="sm:flex items-center ml-2 m:p-2 hidden">
                 <label className="inline-flex items-center md:mr-6 ">
-                    <input onChange={(e) => { console.log(e); typeHandler(e.target.checked) }} className="h-5 w-5" type="checkbox"></input>
+                    <input onChange={(e) => {typeHandler(e.target.checked) }} className="h-5 w-5" type="checkbox"></input>
                     <span className="ml-3 md:text-lg">Full Time</span>
                 </label>
                 <div className="hidden sm:block ml-2">

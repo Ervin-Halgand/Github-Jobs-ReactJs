@@ -54,7 +54,7 @@ const App = () => {
   }
   useEffect(async () => {
     if (reset === true) {
-      fetchData(setInitialLoading, true);
+      await fetchData(setInitialLoading, true);
       setReset(false);
       return;
     }
