@@ -42,7 +42,7 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
         return (
             <section className="m-1 mt-14 p-4 rounded-xl bg-gray-200 sm:m-8 sm:mt-3">
                 <HeaderJobs how_to_apply={job.how_to_apply} location={job.location} title={job.title} type={job.type} created_at={new Date(job.created_at)} company={job.company} company_logo={job.company_logo} />
-                <div className="my-3 px-2 border-gray-300 border-t-2 pt-4">
+                <div className="job--description my-3 px-2 border-gray-300 border-t-2 pt-4">
                     {parse(job.description)}
                 </div>
             </section>

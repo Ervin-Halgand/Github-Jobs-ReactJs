@@ -1,4 +1,4 @@
-ul li::before {
+.job--description > ul li::before {
     content: "\2022";
     color: #4E93A2;
     font-weight: bold;
@@ -6,15 +6,18 @@ ul li::before {
     margin-right: 10px;
 }
 
-ul {
+.job--description > ul {
     list-style: none;
 }
 
-li p {
+.job--description > ul > li > p{
+    display: inline;
+}
+.job--description > li p {
     display: inline;
 }
 
-strong {
+.job--description > strong {
     color: #4E93A2;
     text-transform: upperCase;
 }

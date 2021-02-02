@@ -57,5 +57,6 @@
   "devDependencies": {
     "@types/javascript-time-ago": "^2.0.1",
     "@types/react-router-dom": "^5.1.6"
-  }
+  },
+  "author": "Ervin Halgand"
 }
