@@ -24,6 +24,7 @@ export default class GithubJobsApi {
         this._axiosGithub = axios.create({
             baseURL: `${this._urlLocal}https://jobs.github.com/`,
             timeout: 10000,
+            headers: {"Access-Control-Allow-Origin": "*"}
         });
     }
 
