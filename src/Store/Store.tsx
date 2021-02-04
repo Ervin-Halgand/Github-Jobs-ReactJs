@@ -1,5 +1,8 @@
-const initialState = {
-    page: 0,
-};
+import { configureStore } from "@reduxjs/toolkit";
+import LandingPageManager from './Reducer/LandingPage'
 
-export default initialState;
+export default configureStore({
+    reducer: {
+        LandingPageManager: LandingPageManager
+    }
+});

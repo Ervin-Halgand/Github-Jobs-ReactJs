@@ -21,11 +21,11 @@ interface card {
 function Card({ title, type, created_at, company, company_logo, location, id }: card) {
     return (
         <Link to={`jobs/${id}`}>
-            <div className="w-full bg-gray-200 relative rounded-lg h-48 cursor-pointer shadow-sm card">
+            <div className="w-full h-full bg-gray-200 relative rounded-lg cursor-pointer shadow-sm card">
                 <div className="bg-white  rounded-md overflow-hidden absolute -top-5 left-4 h-12 w-12 img-container">
                     <img className="object-contain w-full h-full" src={company_logo ? company_logo : NoLogo} alt={`logo-${company}`} />
                 </div>
-                <div className="p-3">
+                <div className="p-3 description h-full">
                     <div className="mt-5 flex items-center">
                         <div className="text-gray-600">{timeAgo.format(created_at)}</div>
                         <div className="rounded-full h-2 w-2 bg-gray-300 ml-2" />
@@ -33,7 +33,7 @@ function Card({ title, type, created_at, company, company_logo, location, id }: 
                     </div>
                     <h3><strong className="text-black inline-block my-1 text-md">{title}</strong></h3>
                     <div className="text-gray-600">{company}</div>
-                    <div className="absolute bottom-2 text-indigo-600">{location.split(',').length > 1 ? `${location.split(',')[0]},Location...` : location}</div>
+                    <div className="mt-auto text-indigo-600">{location.split(',').length > 1 ? `${location.split(',')[0]},Location...` : location}</div>
                 </div>
             </div>
         </Link>

@@ -13,22 +13,23 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
 
     useEffect(() => {
         apiGithub.getSingleJob(id).then(job => {
-            let test = job.description.split('>');
-            test.forEach((parsedHtmlElement, index) => {
+            let styleDescription = job.description.split('>');
+            styleDescription.forEach((parsedHtmlElement, index) => {
                 if (parsedHtmlElement.indexOf(':') > -1 && parsedHtmlElement.length < 30)
-                    test[index - 1] += " class='font-bold my-4' style='color: #4E93A2; text-transform: upperCase;'";
+                    styleDescription[index - 1] += " class='font-bold my-4' style='color: #4E93A2; text-transform: upperCase;'";
                 if (parsedHtmlElement.substring(1, 4) === '<ul' && index >= 2)
-                    test[index - 2] += " class='font-bold my-4' style='color: #4E93A2; text-transform: upperCase;'"
+                    styleDescription[index - 2] += " class='font-bold my-4' style='color: #4E93A2; text-transform: upperCase;'"
 
             })
-            job.description = test.join('>').toString();
+            job.description = styleDescription.join('>').toString();
             setjob(job);
 
-        }).catch(() => {
+        }).catch((error) => {
+            console.error(error);
             window.location.assign('/');
         }).finally(() => setIsLoading(false))
 
-    }, [id, apiGithub]);
+    }, [apiGithub, id]);
     if (isLoading)
         return (
             <section className="m-1 mt-14 p-4 rounded-xl bg-gray-200 sm:m-8 sm:mt-3">
@@ -37,16 +38,17 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
                 </div>
             </section>
         )
-
-    if (job)
+    if (job) {
+        const { how_to_apply, location, type, created_at, company, company_logo, description, title } = job;
         return (
             <section className="m-1 mt-14 p-4 rounded-xl bg-gray-200 sm:m-8 sm:mt-3">
-                <HeaderJobs how_to_apply={job.how_to_apply} location={job.location} title={job.title} type={job.type} created_at={new Date(job.created_at)} company={job.company} company_logo={job.company_logo} />
+                <HeaderJobs how_to_apply={how_to_apply} location={location} title={title} type={type} created_at={new Date(created_at)} company={company} company_logo={company_logo} />
                 <div className="job--description my-3 px-2 border-gray-300 border-t-2 pt-4">
-                    {parse(job.description)}
+                    {parse(description)}
                 </div>
             </section>
         );
+    }
 }
 
 export default JobsInformation;

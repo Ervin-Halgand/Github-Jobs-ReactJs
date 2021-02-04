@@ -5,16 +5,7 @@ import HeaderBackground from '../../assets/HeaderImage.jpg';
 import SearchBox from './SearchBox/SearchBox'
 import { Link } from 'react-router-dom';
 
-interface HeaderProps {
-    titleHandler: Function,
-    locationHandler: Function,
-    typeHandler: Function,
-    SearchActionhandler: Function,
-    titleValue: string,
-    locationValue: string
-}
-
-const Header = ({ titleHandler, locationHandler, typeHandler, SearchActionhandler, titleValue, locationValue }: HeaderProps) => {
+const Header = () => {
     const currentUrl = window.location.pathname;
     return (
         <nav className="flex w-full sm:justify-start h-20 relative">
@@ -28,7 +19,7 @@ const Header = ({ titleHandler, locationHandler, typeHandler, SearchActionhandle
                     </div>
                 </Link>
                 {currentUrl === '/' &&
-                    <SearchBox titleValue={titleValue} locationValue={locationValue} SearchActionhandler={SearchActionhandler} titleHandler={titleHandler} locationHandler={locationHandler} typeHandler={typeHandler} />
+                    <SearchBox />
                 }
             </div>
         </nav>

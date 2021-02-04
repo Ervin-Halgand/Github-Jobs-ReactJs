@@ -16,7 +16,7 @@ export interface ApiResult {
 
 export default class GithubJobsApi {
     private _axiosGithub: AxiosInstance;
-    private _urlLocal: string = "https://cors-anywhere.herokuapp.com/";
+    private _urlLocal: string = "https://github-job-proxy.herokuapp.com/";
     readonly requestMaxItemsLength: Number = 50;
 
 
@@ -24,7 +24,11 @@ export default class GithubJobsApi {
         this._axiosGithub = axios.create({
             baseURL: `${this._urlLocal}https://jobs.github.com/`,
             timeout: 10000,
-            headers: {"Access-Control-Allow-Origin": "*"}
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Credentials': true,
+                "crossorigin": true
+            }
         });
     }
 
