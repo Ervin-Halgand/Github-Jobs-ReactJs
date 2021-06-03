@@ -20,6 +20,9 @@ const LandingPageManager = createSlice({
         handleType: (state, action) => {
             state.filterType = action.payload;
         },
+        reloadSearchQueryNumber: (state) => {
+            state.searchQueryToggle = 0;
+        },
         toggleSearchQuery: (state) => {
             state.searchQueryToggle += 1;
             if (state.filterTitle.length || state.filterLocation.length || state.filterType)
@@ -29,7 +32,7 @@ const LandingPageManager = createSlice({
         },
     }
 });
-export const { handleTitle, handleLocation, handleType, toggleSearchQuery } = LandingPageManager.actions;
+export const { handleTitle, handleLocation, handleType, toggleSearchQuery, reloadSearchQueryNumber } = LandingPageManager.actions;
 export const searchQueryToggle = (state: any) => state.LandingPageManager.searchQueryToggle;
 export const LandingManager = (state: any) => state.LandingPageManager;
 export default LandingPageManager.reducer;

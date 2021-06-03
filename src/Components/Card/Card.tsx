@@ -4,6 +4,8 @@ import React from 'react';
 import NoLogo from '../../assets/no-logo.png';
 import './style.css'
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { reloadSearchQueryNumber } from '../../Store/Reducer/LandingPage';
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo();
@@ -19,8 +21,9 @@ interface card {
 }
 
 function Card({ title, type, created_at, company, company_logo, location, id }: card) {
+    const dispatch = useDispatch()
     return (
-        <Link to={`jobs/${id}`}>
+        <Link to={`jobs/${id}`} onClick={() => dispatch(reloadSearchQueryNumber())}>
             <div className="w-full h-full bg-gray-200 relative rounded-lg cursor-pointer shadow-sm card">
                 <div className="bg-white  rounded-md overflow-hidden absolute -top-5 left-4 h-12 w-12 img-container">
                     <img className="object-contain w-full h-full" src={company_logo ? company_logo : NoLogo} alt={`logo-${company}`} />
