@@ -27,7 +27,9 @@ export default class GithubJobsApi {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 'Access-Control-Allow-Credentials': true,
-                "crossorigin": true
+                "crossorigin": true,
+                "Accept": "application/json",
+                "Content-Type": "application/json",
             }
         });
     }

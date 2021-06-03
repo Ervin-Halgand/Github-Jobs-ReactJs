@@ -46,20 +46,17 @@ const LandingPage = ({ apiGithub }: LandingPageProps) => {
         }
     }
     useEffect(() => {
-        if (searchFromHeader === 0)
-            return;
+        if (searchFromHeader === 0) return;
         setPage(1);
         if (page === 1) {
             fetchData(setInitialLoading, true);
             return;
         }
         setReset(true);
-        console.log('new');
         // eslint-disable-next-line
     }, [searchFromHeader]
     )
     useEffect(() => {
-        console.log('useEffect');
         if (reset === true) {
             fetchData(setInitialLoading, true);
             setReset(false);
@@ -87,7 +84,7 @@ const LandingPage = ({ apiGithub }: LandingPageProps) => {
                 <section className="px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 gap-y-10 my-20 sm:my-8">
                     {loaderComponents}
                 </section>
-                {!lenght && <button disabled={loading === true} onClick={() => setPage(page + 1)} className="bg-indigo-500 p-3 mb-4 w-36 self-center focus:outline-none hover:bg-indigo-700 rounded-xl text-white transition-colors duration-300 "> {loading ? "Loading..." : "Load more"}</button>}
+
             </div>
         )
     }

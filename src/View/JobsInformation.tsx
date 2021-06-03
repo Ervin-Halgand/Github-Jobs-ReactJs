@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import GithubJobsApi, { ApiResult } from '../API/Api';
 import HeaderJobs from '../Components/JobsInformation/Header/HeaderJobs'
 import SkeletonLoaderHeaderJobs from '../Components/skeletonLoader/MoreInformation/HeaderInformation/SkeletonLoaderHeaderJobs'
@@ -10,6 +10,7 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
     const { id }: { id: string } = useParams();
     const [isLoading, setIsLoading] = useState<Boolean>(true)
     const [job, setjob] = useState<ApiResult>();
+    let history = useHistory();
 
     useEffect(() => {
         apiGithub.getSingleJob(id).then(job => {
@@ -26,9 +27,9 @@ const JobsInformation = ({ apiGithub }: { apiGithub: GithubJobsApi; }) => {
 
         }).catch((error) => {
             console.error(error);
-            window.location.assign('/');
+            history.push("/");
         }).finally(() => setIsLoading(false))
-
+        // eslint-disable-next-line
     }, [apiGithub, id]);
     if (isLoading)
         return (
